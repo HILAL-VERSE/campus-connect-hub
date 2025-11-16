@@ -16,7 +16,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [role, setRole] = useState<"student" | "faculty">("student");
+  const [role, setRole] = useState<"student" | "faculty" | "admin">("student");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { signIn, signUp, user } = useAuth();
@@ -98,13 +98,14 @@ const Auth = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="role">Role</Label>
-                    <Select value={role} onValueChange={(value: "student" | "faculty") => setRole(value)}>
+                    <Select value={role} onValueChange={(value: "student" | "faculty" | "admin") => setRole(value)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="student">Student</SelectItem>
                         <SelectItem value="faculty">Faculty</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
