@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { ComplaintCard } from "@/components/ComplaintCard";
+import { AdminComplaintDialog } from "@/components/AdminComplaintDialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Filter, BarChart3 } from "lucide-react";
+import { Search, Filter, BarChart3, Download } from "lucide-react";
 import { toast } from "sonner";
 
 const AdminDashboard = () => {
@@ -15,6 +17,8 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [selectedComplaint, setSelectedComplaint] = useState<any>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const fetchComplaints = async () => {
     setLoading(true);
@@ -59,6 +63,36 @@ const AdminDashboard = () => {
     resolved: complaints.filter((c) => c.status === "resolved").length,
   };
 
+  const handleExport = () => {
+    const csvData = [
+      ["ID", "Title", "Description", "Category", "Priority", "Status", "Progress", "Created At", "Admin Notes"],
+      ...filteredComplaints.map((c) => [
+        c.id,
+        c.title,
+        c.description,
+        c.category,
+        c.priority,
+        c.status,
+        c.progress,
+        c.created_at,
+        c.admin_notes || "",
+      ]),
+    ];
+    const csvContent = csvData.map((row) => row.join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `complaints-export-${new Date().toISOString().split("T")[0]}.csv`;
+    a.click();
+    toast.success("Complaints exported successfully");
+  };
+
+  const handleComplaintClick = (complaint: any) => {
+    setSelectedComplaint(complaint);
+    setDialogOpen(true);
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-8">
@@ -87,6 +121,10 @@ const AdminDashboard = () => {
                 <Input placeholder="Search complaints..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-9" />
               </div>
               <div className="flex gap-2">
+                <Button onClick={handleExport} variant="outline" className="gap-2">
+                  <Download className="w-4 h-4" />
+                  Export CSV
+                </Button>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
                   <SelectTrigger className="w-[180px]"><Filter className="w-4 h-4 mr-2" /><SelectValue placeholder="Status" /></SelectTrigger>
                   <SelectContent>
@@ -115,9 +153,18 @@ const AdminDashboard = () => {
         </Card>
 
         <div className="space-y-4">
-          {loading ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">Loading...</p></CardContent></Card> : filteredComplaints.length === 0 ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">No complaints found</p></CardContent></Card> : filteredComplaints.map((complaint) => <ComplaintCard key={complaint.id} complaint={complaint} />)}
+          {loading ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">Loading...</p></CardContent></Card> : filteredComplaints.length === 0 ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">No complaints found</p></CardContent></Card> : filteredComplaints.map((complaint) => <ComplaintCard key={complaint.id} complaint={complaint} onClick={() => handleComplaintClick(complaint)} />)}
         </div>
       </div>
+
+      {selectedComplaint && (
+        <AdminComplaintDialog
+          complaint={selectedComplaint}
+          open={dialogOpen}
+          onOpenChange={setDialogOpen}
+          onUpdate={fetchComplaints}
+        />
+      )}
     </DashboardLayout>
   );
 };

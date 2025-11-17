@@ -24,13 +24,15 @@ export const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
           </Link>
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 bg-warning/10 rounded-lg border border-warning/20">
-              <Award className="w-5 h-5 text-warning" />
-              <div>
-                <p className="text-xs text-muted-foreground">Ticket Points</p>
-                <p className="font-bold text-warning">{profile?.ticket_points || 0}</p>
+            {profile?.role !== "admin" && (
+              <div className="flex items-center gap-2 px-4 py-2 bg-warning/10 rounded-lg border border-warning/20">
+                <Award className="w-5 h-5 text-warning" />
+                <div>
+                  <p className="text-xs text-muted-foreground">Ticket Points</p>
+                  <p className="font-bold text-warning">{profile?.ticket_points || 0}</p>
+                </div>
               </div>
-            </div>
+            )}
             <Button variant="outline" size="sm" onClick={signOut} className="gap-2">
               <LogOut className="w-4 h-4" />
               Sign Out
