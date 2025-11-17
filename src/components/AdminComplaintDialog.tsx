@@ -22,7 +22,6 @@ interface AdminComplaintDialogProps {
 
 export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }: AdminComplaintDialogProps) => {
   const [status, setStatus] = useState(complaint.status);
-  const [priority, setPriority] = useState(complaint.priority);
   const [progress, setProgress] = useState([complaint.progress]);
   const [adminNotes, setAdminNotes] = useState(complaint.admin_notes || "");
   const [saving, setSaving] = useState(false);
@@ -34,7 +33,6 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
         .from("complaints")
         .update({
           status,
-          priority,
           progress: progress[0],
           admin_notes: adminNotes,
         })
@@ -87,35 +85,19 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Status</Label>
-              <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="pending">Pending</SelectItem>
-                  <SelectItem value="in_progress">In Progress</SelectItem>
-                  <SelectItem value="resolved">Resolved</SelectItem>
-                  <SelectItem value="rejected">Rejected</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Priority</Label>
-              <Select value={priority} onValueChange={setPriority}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="low">Low</SelectItem>
-                  <SelectItem value="normal">Normal</SelectItem>
-                  <SelectItem value="urgent">Urgent</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <div className="space-y-2">
+            <Label>Status</Label>
+            <Select value={status} onValueChange={setStatus}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="pending">Pending</SelectItem>
+                <SelectItem value="in_progress">In Progress</SelectItem>
+                <SelectItem value="resolved">Resolved</SelectItem>
+                <SelectItem value="rejected">Rejected</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="space-y-2">
