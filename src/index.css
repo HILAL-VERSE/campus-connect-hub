@@ -8,103 +8,109 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47% 11%;
-    --primary: 221 83% 53%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 38 92% 50%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 174 72% 56%;
-    --accent-foreground: 0 0% 100%;
-    --success: 142 71% 45%;
+    /* Dark premium theme inspired by modern AI/ML landing pages */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 8% 8%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 8% 8%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Golden accent as primary */
+    --primary: 45 93% 58%;
+    --primary-foreground: 240 10% 3.9%;
+    
+    /* Deep blue-gray as secondary */
+    --secondary: 240 10% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 64%;
+    
+    /* Electric cyan accent */
+    --accent: 190 90% 55%;
+    --accent-foreground: 240 10% 3.9%;
+    
+    --success: 142 76% 50%;
     --success-foreground: 0 0% 100%;
+    
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    
+    --warning: 38 92% 60%;
+    --warning-foreground: 240 10% 3.9%;
+    
+    --border: 240 6% 15%;
+    --input: 240 6% 12%;
+    --ring: 45 93% 58%;
+    
     --radius: 0.75rem;
-    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(221 83% 63%));
-    --gradient-hero: linear-gradient(180deg, hsl(221 83% 98%), hsl(0 0% 100%));
-    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --shadow-elevated: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Premium gradients with golden glow */
+    --gradient-primary: linear-gradient(135deg, hsl(45 93% 58%) 0%, hsl(38 92% 50%) 100%);
+    --gradient-hero: radial-gradient(ellipse at center, hsl(45 93% 20%) 0%, hsl(240 10% 3.9%) 60%);
+    --gradient-card: linear-gradient(135deg, hsl(240 8% 10%) 0%, hsl(240 8% 6%) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(45 93% 58% / 0.15) 0%, transparent 70%);
+    
+    /* Enhanced shadows with golden glow */
+    --shadow-card: 0 8px 16px -4px rgba(0, 0, 0, 0.6), 0 0 24px -8px rgba(251, 191, 36, 0.15);
+    --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 0 48px -12px rgba(251, 191, 36, 0.2);
+    --shadow-glow: 0 0 60px rgba(251, 191, 36, 0.4), 0 0 100px rgba(251, 191, 36, 0.2);
+    
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    --sidebar-background: 240 10% 5%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 45 93% 58%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 6% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 6% 15%;
+    --sidebar-ring: 45 93% 58%;
   }
 
   .dark {
-    /* Modern Dark Theme - Deep backgrounds with vibrant accents */
-    --background: 240 10% 6%;
+    /* Same as root for consistency - already dark theme */
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-
-    --card: 240 8% 10%;
+    --card: 240 8% 8%;
     --card-foreground: 0 0% 98%;
-
-    --popover: 240 8% 10%;
+    --popover: 240 8% 8%;
     --popover-foreground: 0 0% 98%;
-
-    /* Vibrant purple-blue gradient for primary */
-    --primary: 250 95% 65%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Complementary cyan for secondary */
-    --secondary: 190 90% 55%;
-    --secondary-foreground: 240 10% 6%;
-
-    --muted: 240 6% 15%;
-    --muted-foreground: 240 5% 65%;
-
-    /* Electric accent color */
-    --accent: 280 85% 65%;
-    --accent-foreground: 0 0% 100%;
-
+    --primary: 45 93% 58%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 240 10% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 64%;
+    --accent: 190 90% 55%;
+    --accent-foreground: 240 10% 3.9%;
     --success: 142 76% 50%;
     --success-foreground: 0 0% 100%;
-
-    --destructive: 0 90% 65%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
     --warning: 38 92% 60%;
-    --warning-foreground: 0 0% 100%;
-
-    --border: 240 6% 18%;
-    --input: 240 6% 15%;
-    --ring: 250 95% 65%;
-
-    /* Modern gradients with vibrant colors */
-    --gradient-primary: linear-gradient(135deg, hsl(250 95% 65%) 0%, hsl(280 85% 65%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(190 90% 55%) 0%, hsl(250 95% 65%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(240 10% 6%) 0%, hsl(240 8% 10%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(240 8% 12%) 0%, hsl(240 8% 10%) 100%);
-    
-    /* Enhanced shadows with glow effects */
-    --shadow-card: 0 8px 16px -4px rgba(0, 0, 0, 0.5), 0 0 20px -8px rgba(147, 51, 234, 0.1);
-    --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 0 40px -12px rgba(147, 51, 234, 0.15);
-    --shadow-glow: 0 0 40px rgba(147, 51, 234, 0.3);
-    
-    --sidebar-background: 240 10% 8%;
+    --warning-foreground: 240 10% 3.9%;
+    --border: 240 6% 15%;
+    --input: 240 6% 12%;
+    --ring: 45 93% 58%;
+    --gradient-primary: linear-gradient(135deg, hsl(45 93% 58%) 0%, hsl(38 92% 50%) 100%);
+    --gradient-hero: radial-gradient(ellipse at center, hsl(45 93% 20%) 0%, hsl(240 10% 3.9%) 60%);
+    --gradient-card: linear-gradient(135deg, hsl(240 8% 10%) 0%, hsl(240 8% 6%) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(45 93% 58% / 0.15) 0%, transparent 70%);
+    --shadow-card: 0 8px 16px -4px rgba(0, 0, 0, 0.6), 0 0 24px -8px rgba(251, 191, 36, 0.15);
+    --shadow-elevated: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 0 48px -12px rgba(251, 191, 36, 0.2);
+    --shadow-glow: 0 0 60px rgba(251, 191, 36, 0.4), 0 0 100px rgba(251, 191, 36, 0.2);
+    --sidebar-background: 240 10% 5%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 250 95% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 6% 15%;
+    --sidebar-primary: 45 93% 58%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
+    --sidebar-accent: 240 6% 12%;
     --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 240 6% 18%;
-    --sidebar-ring: 250 95% 65%;
+    --sidebar-border: 240 6% 15%;
+    --sidebar-ring: 45 93% 58%;
   }
 }
 
