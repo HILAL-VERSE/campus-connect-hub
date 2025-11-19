@@ -100,16 +100,18 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
             </Select>
           </div>
 
-          <div className="space-y-2">
-            <Label>Progress: {progress[0]}%</Label>
-            <Slider
-              value={progress}
-              onValueChange={setProgress}
-              max={100}
-              step={5}
-              className="w-full"
-            />
-          </div>
+          {status === "in_progress" && (
+            <div className="space-y-2">
+              <Label>Progress: {progress[0]}%</Label>
+              <Slider
+                value={progress}
+                onValueChange={setProgress}
+                max={100}
+                step={5}
+                className="w-full"
+              />
+            </div>
+          )}
 
           <div className="space-y-2">
             <Label>Admin Notes</Label>

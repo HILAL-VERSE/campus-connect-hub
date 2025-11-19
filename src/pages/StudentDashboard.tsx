@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { SubmitComplaintDialog } from "@/components/SubmitComplaintDialog";
 import { ComplaintCard } from "@/components/ComplaintCard";
+import { ResolvedComplaintCard } from "@/components/ResolvedComplaintCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -170,30 +171,70 @@ const StudentDashboard = () => {
           </CardContent>
         </Card>
 
-        {/* Complaints List */}
+        {/* Active Complaints */}
         <div className="space-y-4">
+          <h3 className="text-xl font-semibold">Active Complaints & Initiatives</h3>
           {loading ? (
             <Card>
               <CardContent className="py-12 text-center">
                 <p className="text-muted-foreground">Loading complaints...</p>
               </CardContent>
             </Card>
-          ) : filteredComplaints.length === 0 ? (
+          ) : filteredComplaints.filter(c => c.status === "pending" || c.status === "in_progress").length === 0 ? (
             <Card>
               <CardContent className="py-12 text-center">
                 <p className="text-muted-foreground">
                   {searchTerm || statusFilter !== "all" || categoryFilter !== "all"
-                    ? "No complaints match your filters"
-                    : "No complaints yet. Submit your first one!"}
+                    ? "No active complaints match your filters"
+                    : "No active complaints. Submit your first one!"}
                 </p>
               </CardContent>
             </Card>
           ) : (
-            filteredComplaints.map((complaint) => (
-              <ComplaintCard key={complaint.id} complaint={complaint} />
-            ))
+            filteredComplaints
+              .filter(c => c.status === "pending" || c.status === "in_progress")
+              .map((complaint) => (
+                <ComplaintCard key={complaint.id} complaint={complaint} />
+              ))
           )}
         </div>
+
+        {/* Resolved Complaints */}
+        {filteredComplaints.filter(c => c.status === "resolved").length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold text-success">Resolved</h3>
+            {filteredComplaints
+              .filter(c => c.status === "resolved")
+              .map((complaint) => (
+                <ResolvedComplaintCard key={complaint.id} complaint={complaint} />
+              ))}
+          </div>
+        )}
+
+        {/* Rejected Complaints */}
+        {filteredComplaints.filter(c => c.status === "rejected").length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold text-destructive">Rejected</h3>
+            {filteredComplaints
+              .filter(c => c.status === "rejected")
+              .map((complaint) => (
+                <Card key={complaint.id} className="border-destructive/30 bg-destructive/5">
+                  <CardHeader>
+                    <CardTitle className="text-lg">{complaint.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm text-muted-foreground">{complaint.description}</p>
+                    {complaint.admin_notes && (
+                      <div className="bg-muted/50 p-3 rounded-lg">
+                        <h4 className="font-semibold text-sm mb-1">Reason:</h4>
+                        <p className="text-sm">{complaint.admin_notes}</p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
