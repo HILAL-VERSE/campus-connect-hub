@@ -152,8 +152,76 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
 
+        {/* Active Complaints */}
         <div className="space-y-4">
-          {loading ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">Loading...</p></CardContent></Card> : filteredComplaints.length === 0 ? <Card><CardContent className="py-12 text-center"><p className="text-muted-foreground">No complaints found</p></CardContent></Card> : filteredComplaints.map((complaint) => <ComplaintCard key={complaint.id} complaint={complaint} onClick={() => handleComplaintClick(complaint)} />)}
+          <h3 className="text-xl font-semibold">Active Complaints</h3>
+          {loading ? (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <p className="text-muted-foreground">Loading...</p>
+              </CardContent>
+            </Card>
+          ) : filteredComplaints.filter(c => c.status === "pending" || c.status === "in_progress").length === 0 ? (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <p className="text-muted-foreground">No active complaints</p>
+              </CardContent>
+            </Card>
+          ) : (
+            filteredComplaints
+              .filter(c => c.status === "pending" || c.status === "in_progress")
+              .map((complaint) => (
+                <ComplaintCard 
+                  key={complaint.id} 
+                  complaint={complaint} 
+                  onClick={() => handleComplaintClick(complaint)} 
+                />
+              ))
+          )}
+        </div>
+
+        {/* Resolved Complaints */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-semibold text-success">Resolved Complaints</h3>
+          {loading ? null : filteredComplaints.filter(c => c.status === "resolved").length === 0 ? (
+            <Card>
+              <CardContent className="py-8 text-center">
+                <p className="text-muted-foreground">No resolved complaints</p>
+              </CardContent>
+            </Card>
+          ) : (
+            filteredComplaints
+              .filter(c => c.status === "resolved")
+              .map((complaint) => (
+                <ComplaintCard 
+                  key={complaint.id} 
+                  complaint={complaint} 
+                  onClick={() => handleComplaintClick(complaint)} 
+                />
+              ))
+          )}
+        </div>
+
+        {/* Rejected Complaints */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-semibold text-destructive">Rejected Complaints</h3>
+          {loading ? null : filteredComplaints.filter(c => c.status === "rejected").length === 0 ? (
+            <Card>
+              <CardContent className="py-8 text-center">
+                <p className="text-muted-foreground">No rejected complaints</p>
+              </CardContent>
+            </Card>
+          ) : (
+            filteredComplaints
+              .filter(c => c.status === "rejected")
+              .map((complaint) => (
+                <ComplaintCard 
+                  key={complaint.id} 
+                  complaint={complaint} 
+                  onClick={() => handleComplaintClick(complaint)} 
+                />
+              ))
+          )}
         </div>
       </div>
 
