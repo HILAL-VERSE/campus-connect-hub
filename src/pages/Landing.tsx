@@ -1,26 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquare, TrendingUp, Award, Shield, Zap, Users, BarChart3, CheckCircle2, ArrowRight, Sparkles, Globe, Lock, Clock, Target, Rocket, Star } from "lucide-react";
+import { MessageSquare, TrendingUp, Award, Shield, Zap, Users, BarChart3, CheckCircle2, ArrowRight, Sparkles, Target, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroDashboard from "@/assets/hero-dashboard.png";
 import featureTracking from "@/assets/feature-tracking.png";
 import featureRewards from "@/assets/feature-rewards.png";
-import backgroundShapes from "@/assets/background-shapes.png";
 
 const Landing = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden relative">
-      {/* Floating background shapes */}
-      <div className="fixed inset-0 pointer-events-none z-0 opacity-20">
-        <img src={backgroundShapes} alt="" className="absolute w-full h-full object-cover" />
+      {/* AI/ML themed background with gradient mesh */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-warning/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
       </div>
 
       {/* Floating particles */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(25)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-2 h-2 bg-primary rounded-full opacity-20 animate-float"
+            className="absolute w-1.5 h-1.5 bg-primary rounded-full opacity-30 animate-float"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -31,11 +33,19 @@ const Landing = () => {
         ))}
       </div>
 
+      {/* Grid pattern overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.015]"
+           style={{
+             backgroundImage: 'linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)',
+             backgroundSize: '60px 60px'
+           }} 
+      />
+
       {/* Navigation */}
       <header className="relative border-b border-border/50 bg-background/80 backdrop-blur-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
+            <div className="w-11 h-11 rounded-xl bg-gradient-primary flex items-center justify-center shadow-glow">
               <MessageSquare className="w-6 h-6 text-primary-foreground" />
             </div>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
@@ -46,10 +56,9 @@ const Landing = () => {
             <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</a>
             <a href="#showcase" className="text-muted-foreground hover:text-primary transition-colors">Showcase</a>
             <a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors">How It Works</a>
-            <a href="#impact" className="text-muted-foreground hover:text-primary transition-colors">Impact</a>
           </nav>
           <div className="flex gap-3">
-            <Button variant="outline" asChild className="border-border hover:bg-muted">
+            <Button variant="outline" asChild className="border-border hover:bg-muted hidden sm:inline-flex">
               <Link to="/auth">Sign In</Link>
             </Button>
             <Button asChild className="bg-gradient-primary hover:opacity-90 shadow-lg shadow-primary/25">
@@ -59,499 +68,482 @@ const Landing = () => {
         </div>
       </header>
 
-      {/* Hero Section with 3D Dashboard */}
-      <section className="relative container mx-auto px-4 py-20 md:py-32">
-        {/* Animated background glow */}
-        <div className="absolute inset-0 bg-gradient-hero opacity-50 blur-3xl" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-glow blur-3xl animate-pulse" />
-        
-        <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-          {/* Left Content */}
-          <div className="space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm text-primary font-medium">AI-Powered Campus Solutions</span>
-            </div>
-            
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              <span className="block">Transform</span>
-              <span className="block">Campus Life</span>
-              <span className="block bg-gradient-to-r from-primary via-warning to-accent bg-clip-text text-transparent">
-                Together
-              </span>
-            </h2>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-              Experience the future of campus complaint management with intelligent tracking, 
-              gamified rewards, and transparent resolution processes that empower every voice.
-            </p>
-            
-            <div className="flex gap-4 flex-wrap justify-center lg:justify-start pt-4">
-              <Button size="lg" asChild className="text-lg px-10 py-6 bg-gradient-primary hover:opacity-90 shadow-glow group">
-                <Link to="/auth?mode=signup">
-                  Start Free Today
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-10 py-6 border-primary/30 hover:bg-primary/10">
-                <Link to="/auth">Watch Demo</Link>
-              </Button>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex gap-8 justify-center lg:justify-start pt-6">
-              <div>
-                <div className="text-3xl font-bold text-primary">10K+</div>
-                <div className="text-sm text-muted-foreground">Resolved</div>
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <section className="container mx-auto px-6 lg:px-8 py-24 md:py-32 lg:py-40">
+          <div className="absolute inset-0 bg-gradient-hero opacity-30 blur-3xl pointer-events-none" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-glow opacity-20 blur-3xl animate-pulse pointer-events-none" />
+          
+          <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-7xl mx-auto">
+            {/* Left Content */}
+            <div className="space-y-10 text-center lg:text-left order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <span className="text-sm text-primary font-medium">AI-Powered Campus Solutions</span>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-accent">98%</div>
-                <div className="text-sm text-muted-foreground">Satisfaction</div>
+              
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="block mb-2">Transform</span>
+                <span className="block mb-2">Campus Life</span>
+                <span className="block bg-gradient-to-r from-primary via-warning to-accent bg-clip-text text-transparent">
+                  With Intelligence
+                </span>
+              </h2>
+              
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                BroRise revolutionizes how students and faculty communicate. Track complaints, 
+                earn rewards, and create a better campus environment with our intelligent platform.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                <Button size="lg" asChild className="bg-gradient-primary hover:opacity-90 shadow-xl shadow-primary/30 text-lg px-8 py-6">
+                  <Link to="/auth?mode=signup">
+                    Start Free Trial <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="border-border/50 hover:bg-muted text-lg px-8 py-6">
+                  <Link to="#features">
+                    Explore Features
+                  </Link>
+                </Button>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-success">24/7</div>
-                <div className="text-sm text-muted-foreground">Support</div>
-              </div>
-            </div>
-          </div>
 
-          {/* Right - 3D Dashboard Image */}
-          <div className="relative perspective-1000">
-            <div className="relative transform-gpu hover:scale-105 transition-transform duration-700 animate-float-slow">
-              <div className="absolute inset-0 bg-gradient-primary opacity-30 blur-3xl" />
-              <img 
-                src={heroDashboard} 
-                alt="BroRise Dashboard" 
-                className="relative w-full rounded-2xl shadow-glow border border-primary/20"
-                style={{
-                  transform: 'rotateY(-10deg) rotateX(5deg)',
-                  transformStyle: 'preserve-3d'
-                }}
-              />
-              {/* Floating elements around dashboard */}
-              <div className="absolute -top-6 -right-6 w-16 h-16 bg-warning/20 rounded-full blur-xl animate-pulse" />
-              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-accent/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid with 3D Cards */}
-      <section id="features" className="relative container mx-auto px-4 py-20 md:py-32">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
-            <Zap className="w-4 h-4 text-accent" />
-            <span className="text-sm text-accent font-medium">Powerful Features</span>
-          </div>
-          <h3 className="text-4xl md:text-5xl font-bold mb-6">
-            Everything You Need to
-            <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mt-2">
-              Drive Real Change
-            </span>
-          </h3>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Built for students, faculty, and administrators with cutting-edge technology
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              icon: MessageSquare,
-              title: "Smart Reporting",
-              description: "Submit complaints with AI-powered categorization, rich media support, and anonymous options for sensitive issues",
-              color: "primary"
-            },
-            {
-              icon: TrendingUp,
-              title: "Live Tracking",
-              description: "Monitor complaint status with real-time progress updates, estimated resolution times, and milestone notifications",
-              color: "accent"
-            },
-            {
-              icon: Award,
-              title: "Gamified Rewards",
-              description: "Earn ticket points for active participation, quality reporting, and community engagement with competitive leaderboards",
-              color: "warning"
-            },
-            {
-              icon: Shield,
-              title: "Full Transparency",
-              description: "View administrative actions, resolution history, and public complaint statistics with complete accountability",
-              color: "success"
-            },
-            {
-              icon: Users,
-              title: "Role-Based Access",
-              description: "Tailored dashboards for students, faculty, and administrators with appropriate permissions and specialized workflows",
-              color: "primary"
-            },
-            {
-              icon: BarChart3,
-              title: "Advanced Analytics",
-              description: "Comprehensive insights into complaint trends, response times, and resolution effectiveness with visual charts",
-              color: "accent"
-            }
-          ].map((feature, index) => (
-            <Card 
-              key={index}
-              className="relative group bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-elevated overflow-hidden transform hover:-translate-y-2"
-            >
-              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity" />
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-glow opacity-0 group-hover:opacity-100 transition-opacity blur-2xl" />
-              <CardContent className="relative pt-8 pb-8 space-y-4">
-                <div className={`w-16 h-16 rounded-xl bg-${feature.color}/10 border border-${feature.color}/20 flex items-center justify-center group-hover:scale-110 transition-transform shadow-card`}>
-                  <feature.icon className={`w-8 h-8 text-${feature.color}`} />
+              <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span className="text-muted-foreground">No credit card required</span>
                 </div>
-                <h4 className="text-2xl font-semibold">{feature.title}</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Visual Showcase with Images */}
-      <section id="showcase" className="relative container mx-auto px-4 py-20 md:py-32">
-        <div className="max-w-7xl mx-auto space-y-32">
-          {/* Feature 1: Real-Time Tracking */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative perspective-1000 order-2 lg:order-1">
-              <div className="relative transform-gpu hover:scale-105 transition-transform duration-700">
-                <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl" />
-                <img 
-                  src={featureTracking} 
-                  alt="Real-time tracking" 
-                  className="relative w-full rounded-2xl shadow-elevated border border-accent/20"
-                  style={{
-                    transform: 'rotateY(5deg) rotateX(-5deg)',
-                    transformStyle: 'preserve-3d'
-                  }}
-                />
-              </div>
-            </div>
-            <div className="space-y-6 order-1 lg:order-2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
-                <Target className="w-4 h-4 text-accent" />
-                <span className="text-sm text-accent font-medium">Real-Time Intelligence</span>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold">
-                Track Every Step of
-                <span className="block bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent mt-2">
-                  Your Journey
-                </span>
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Stay informed with instant notifications, progress milestones, and transparent 
-                communication throughout the entire resolution process. Our intelligent system 
-                keeps you updated every step of the way.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Instant push notifications for status changes",
-                  "Visual progress indicators with milestones",
-                  "Estimated resolution time predictions",
-                  "Direct communication with administrators"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Feature 2: Gamified Rewards */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-warning/10 border border-warning/20">
-                <Rocket className="w-4 h-4 text-warning" />
-                <span className="text-sm text-warning font-medium">Engagement Rewards</span>
-              </div>
-              <h3 className="text-4xl md:text-5xl font-bold">
-                Earn Recognition for
-                <span className="block bg-gradient-to-r from-warning to-primary bg-clip-text text-transparent mt-2">
-                  Making a Difference
-                </span>
-              </h3>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Our innovative ticket point system rewards active community members who contribute 
-                to campus improvement. Climb the leaderboards, unlock achievements, and showcase 
-                your impact on campus culture.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Earn points for quality complaint submissions",
-                  "Unlock exclusive badges and achievements",
-                  "Compete on campus-wide leaderboards",
-                  "Redeem points for real campus perks"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Star className="w-6 h-6 text-warning flex-shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative perspective-1000">
-              <div className="relative transform-gpu hover:scale-105 transition-transform duration-700">
-                <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl" />
-                <img 
-                  src={featureRewards} 
-                  alt="Gamified rewards" 
-                  className="relative w-full rounded-2xl shadow-elevated border border-warning/20"
-                  style={{
-                    transform: 'rotateY(-5deg) rotateX(5deg)',
-                    transformStyle: 'preserve-3d'
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works with 3D Steps */}
-      <section id="how-it-works" className="relative container mx-auto px-4 py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-glow opacity-10 blur-3xl" />
-        
-        <div className="relative text-center mb-20">
-          <h3 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Simple Process,
-            </span>
-            <span className="block mt-2">Powerful Results</span>
-          </h3>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Three easy steps to transform your campus experience
-          </p>
-        </div>
-
-        <div className="relative grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {/* Connecting lines */}
-          <div className="hidden md:block absolute top-16 left-[16.66%] right-[16.66%] h-0.5">
-            <div className="h-full bg-gradient-to-r from-primary via-accent to-primary opacity-30" />
-          </div>
-
-          {[
-            {
-              step: "01",
-              icon: MessageSquare,
-              title: "Submit & Categorize",
-              description: "Create detailed complaints with automatic AI categorization, rich media attachments, and anonymous options",
-              highlights: ["AI-Powered", "Media Support", "Anonymous Option"]
-            },
-            {
-              step: "02",
-              icon: Clock,
-              title: "Track & Engage",
-              description: "Follow real-time progress with visual milestones, communicate directly with admins, and receive instant updates",
-              highlights: ["Real-Time", "Direct Chat", "Notifications"]
-            },
-            {
-              step: "03",
-              icon: CheckCircle2,
-              title: "Resolve & Reward",
-              description: "View resolution details, provide feedback, earn ticket points, and celebrate your contribution to campus improvement",
-              highlights: ["Earn Points", "Leave Feedback", "Get Rewarded"]
-            }
-          ].map((step, index) => (
-            <div key={index} className="relative text-center group">
-              {/* Step number badge */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                <div className="w-20 h-20 rounded-full bg-gradient-primary flex items-center justify-center text-3xl font-bold text-primary-foreground shadow-glow group-hover:scale-110 transition-transform">
-                  {step.step}
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span className="text-muted-foreground">Free for students</span>
                 </div>
               </div>
+            </div>
 
-              <Card className="relative pt-16 pb-8 px-6 bg-gradient-card border-border/50 group-hover:border-primary/50 transition-all duration-500 hover:shadow-elevated transform group-hover:-translate-y-2 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity" />
-                
-                <CardContent className="space-y-6">
-                  <div className="w-20 h-20 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
-                    <step.icon className="w-10 h-10 text-primary" />
-                  </div>
-                  
-                  <h4 className="text-2xl font-bold">{step.title}</h4>
-                  
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
+            {/* Right - 3D Dashboard Image */}
+            <div className="relative group order-1 lg:order-2">
+              <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-700" />
+              
+              <div className="relative transform-gpu transition-all duration-700 hover:scale-105">
+                <img 
+                  src={heroDashboard} 
+                  alt="Dashboard Analytics" 
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
+              </div>
 
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {step.highlights.map((highlight, i) => (
-                      <span 
-                        key={i}
-                        className="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs text-primary font-medium"
-                      >
-                        {highlight}
-                      </span>
-                    ))}
+              {/* Floating accent cards */}
+              <Card className="absolute -right-4 lg:-right-8 top-16 lg:top-20 w-40 lg:w-48 bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu rotate-6 hover:rotate-12 transition-all duration-500 hidden md:block">
+                <CardContent className="p-3 lg:p-4 space-y-2">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
+                    <Rocket className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
                   </div>
+                  <p className="text-xs lg:text-sm font-medium text-foreground">Fast Response</p>
+                  <p className="text-xl lg:text-2xl font-bold text-primary">2.4hrs</p>
+                  <p className="text-xs text-muted-foreground">Avg. resolution time</p>
+                </CardContent>
+              </Card>
+
+              <Card className="absolute -left-4 lg:-left-8 bottom-16 lg:bottom-20 w-40 lg:w-48 bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu -rotate-6 hover:-rotate-12 transition-all duration-500 hidden md:block">
+                <CardContent className="p-3 lg:p-4 space-y-2">
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br from-warning to-accent flex items-center justify-center">
+                    <Award className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
+                  </div>
+                  <p className="text-xs lg:text-sm font-medium text-foreground">Satisfaction</p>
+                  <p className="text-xl lg:text-2xl font-bold text-warning">95%</p>
+                  <p className="text-xs text-muted-foreground">Student rating</p>
                 </CardContent>
               </Card>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Impact Stats with 3D Cards */}
-      <section id="impact" className="relative container mx-auto px-4 py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-hero opacity-30 blur-3xl" />
-        
-        <Card className="relative bg-gradient-card border-border/50 shadow-elevated overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-primary opacity-5" />
-          <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-glow blur-3xl opacity-50" />
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-glow blur-3xl opacity-50" />
-          
-          <CardContent className="relative py-16 px-8">
-            <div className="text-center mb-16">
-              <h3 className="text-4xl md:text-5xl font-bold mb-4">
-                Making Real Impact
-                <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mt-2">
-                  Across Campuses
-                </span>
-              </h3>
-              <p className="text-lg text-muted-foreground">
-                Join thousands of students driving positive change
-              </p>
+        {/* Features Section */}
+        <section id="features" className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <Zap className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary font-medium">Powerful Features</span>
             </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { icon: Globe, value: "50+", label: "Campuses Using BroRise", subtext: "And growing daily" },
-                { icon: Users, value: "25K+", label: "Active Community Members", subtext: "Engaged students & faculty" },
-                { icon: CheckCircle2, value: "95%", label: "Resolution Success Rate", subtext: "Industry leading" },
-                { icon: Zap, value: "< 48h", label: "Average Response Time", subtext: "Lightning fast support" }
-              ].map((stat, index) => (
-                <div key={index} className="relative group">
-                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 rounded-xl transition-opacity" />
-                  <div className="relative text-center space-y-4 p-6 rounded-xl border border-border/50 group-hover:border-primary/50 transition-all transform group-hover:-translate-y-2">
-                    <div className="w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto shadow-card group-hover:scale-110 transition-transform">
-                      <stat.icon className="w-8 h-8 text-primary" />
-                    </div>
-                    <div className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      {stat.value}
-                    </div>
-                    <div className="space-y-1">
-                      <div className="text-foreground font-semibold">{stat.label}</div>
-                      <div className="text-sm text-muted-foreground">{stat.subtext}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Final CTA */}
-      <section className="relative container mx-auto px-4 py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-glow opacity-40 blur-3xl" />
-        
-        <Card className="relative bg-gradient-card border border-primary/30 shadow-glow overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-primary opacity-10" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-glow blur-3xl opacity-30" />
-          
-          <CardContent className="relative py-20 px-8 text-center space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <Lock className="w-4 h-4 text-primary" />
-              <span className="text-sm text-primary font-medium">Secure & Anonymous • Free Forever</span>
-            </div>
-            
-            <h3 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl mx-auto">
-              Ready to Transform Your Campus Into a
-              <span className="block bg-gradient-to-r from-primary via-warning to-accent bg-clip-text text-transparent mt-2">
-                Better Place?
+            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+              Everything You Need for{" "}
+              <span className="bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
+                Campus Excellence
               </span>
             </h3>
-            
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Join thousands of students and faculty already making a real difference. 
-              Start reporting issues, tracking progress, and earning rewards today.
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Comprehensive tools designed to streamline communication and foster collaboration
             </p>
-            
-            <div className="flex gap-4 justify-center flex-wrap pt-6">
-              <Button size="lg" asChild className="text-lg px-12 py-7 bg-gradient-primary hover:opacity-90 shadow-glow group">
-                <Link to="/auth?mode=signup">
-                  Get Started Free
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+            {[
+              {
+                icon: MessageSquare,
+                title: "Smart Complaint System",
+                description: "Submit and track complaints with AI-powered categorization and priority assignment for faster resolution",
+                gradient: "from-blue-500 to-cyan-500"
+              },
+              {
+                icon: BarChart3,
+                title: "Real-Time Analytics",
+                description: "Get instant insights into complaint trends, resolution rates, and campus improvement metrics",
+                gradient: "from-purple-500 to-pink-500"
+              },
+              {
+                icon: Award,
+                title: "Rewards & Gamification",
+                description: "Earn points for active participation and unlock achievements for contributing to campus betterment",
+                gradient: "from-amber-500 to-orange-500"
+              },
+              {
+                icon: Shield,
+                title: "Anonymous Reporting",
+                description: "Submit sensitive issues anonymously while maintaining accountability through secure tracking",
+                gradient: "from-emerald-500 to-teal-500"
+              },
+              {
+                icon: Users,
+                title: "Multi-Role Dashboard",
+                description: "Customized interfaces for students, faculty, and admins with role-specific features and controls",
+                gradient: "from-red-500 to-rose-500"
+              },
+              {
+                icon: Target,
+                title: "Progress Tracking",
+                description: "Monitor complaint status in real-time from submission to resolution with detailed updates",
+                gradient: "from-indigo-500 to-violet-500"
+              }
+            ].map((feature, index) => (
+              <Card 
+                key={index}
+                className="group relative bg-card/40 backdrop-blur-xl border-border/50 hover:border-primary/50 transition-all duration-500 overflow-hidden hover:scale-105 transform-gpu hover:-translate-y-2"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500" 
+                     style={{backgroundImage: `linear-gradient(135deg, var(--primary), var(--warning))`}} />
+                
+                <CardContent className="p-6 lg:p-8 space-y-6">
+                  <div className={`w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                    <feature.icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h4 className="text-lg lg:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      {feature.title}
+                    </h4>
+                    <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4">
+                    <button className="text-primary text-sm font-medium flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Learn more <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Visual Showcase Section */}
+        <section id="showcase" className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto mb-32">
+            {/* Left - 3D Tracking Image */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-warning opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-700" />
+              
+              <div className="relative transform-gpu transition-all duration-700 hover:scale-105">
+                <img 
+                  src={featureTracking} 
+                  alt="Progress Tracking" 
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
+              </div>
             </div>
 
-            <p className="text-sm text-muted-foreground pt-4">
-              No credit card required • Set up in 2 minutes • Free forever
-            </p>
-          </CardContent>
-        </Card>
-      </section>
+            {/* Right Content */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20">
+                <Target className="w-4 h-4 text-primary" />
+                <span className="text-sm text-primary font-medium">Progress Tracking</span>
+              </div>
 
-      {/* Footer */}
-      <footer className="relative border-t border-border/50 py-12 bg-card/50 backdrop-blur-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
-                <MessageSquare className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
-                  BroRise
-                </h1>
-                <p className="text-xs text-muted-foreground">Empowering Campus Communities</p>
-              </div>
-            </div>
-            
-            <div className="text-center md:text-right">
-              <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} BroRise. All rights reserved.
+              <h3 className="text-4xl md:text-5xl font-bold leading-tight">
+                Track Every Step{" "}
+                <span className="block mt-2 bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
+                  From Start to Finish
+                </span>
+              </h3>
+
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Stay informed with real-time updates on your complaints. Our intelligent tracking 
+                system keeps you in the loop at every stage, ensuring transparency and accountability.
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Making campuses better, one complaint at a time.
-              </p>
+
+              <ul className="space-y-4 pt-4">
+                {[
+                  "Real-time status notifications",
+                  "Detailed progress timeline",
+                  "Admin notes and updates",
+                  "Estimated resolution time"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-foreground text-base lg:text-lg">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </div>
-      </footer>
+
+          {/* Rewards Section */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+            {/* Left Content */}
+            <div className="space-y-8 order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-warning/10 border border-warning/20">
+                <Award className="w-4 h-4 text-warning" />
+                <span className="text-sm text-warning font-medium">Rewards System</span>
+              </div>
+
+              <h3 className="text-4xl md:text-5xl font-bold leading-tight">
+                Get Rewarded{" "}
+                <span className="block mt-2 bg-gradient-to-r from-warning to-accent bg-clip-text text-transparent">
+                  For Making a Difference
+                </span>
+              </h3>
+
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Earn points for every contribution to campus improvement. Unlock achievements, 
+                climb the leaderboard, and get recognized for being an active community member.
+              </p>
+
+              <ul className="space-y-4 pt-4">
+                {[
+                  "Points for complaint submissions",
+                  "Bonus rewards for valid reports",
+                  "Achievement badges and milestones",
+                  "Monthly leaderboard rankings"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-full bg-warning/20 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-warning" />
+                    </div>
+                    <span className="text-foreground text-base lg:text-lg">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right - 3D Rewards Image */}
+            <div className="relative group order-1 lg:order-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-warning to-accent opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-700" />
+              
+              <div className="relative transform-gpu transition-all duration-700 hover:scale-105">
+                <img 
+                  src={featureRewards} 
+                  alt="Rewards System" 
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section id="how-it-works" className="container mx-auto px-6 lg:px-8 py-24 md:py-32 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <Rocket className="w-4 h-4 text-primary" />
+              <span className="text-sm text-primary font-medium">Simple Process</span>
+            </div>
+            <h3 className="text-4xl md:text-5xl font-bold mb-6">
+              Get Started in{" "}
+              <span className="bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
+                Three Easy Steps
+              </span>
+            </h3>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Transform your campus experience with our streamlined complaint resolution system
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-6xl mx-auto">
+            {[
+              {
+                step: "01",
+                title: "Submit Your Complaint",
+                description: "Use our intuitive form to submit complaints. Choose categories, add details, and even submit anonymously if needed.",
+                icon: MessageSquare,
+                color: "from-blue-500 to-cyan-500"
+              },
+              {
+                step: "02",
+                title: "Track Progress",
+                description: "Monitor real-time updates as your complaint moves through review, assignment, and resolution stages.",
+                icon: BarChart3,
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                step: "03",
+                title: "Earn Rewards",
+                description: "Gain points for valid submissions and active participation. Unlock achievements and climb the leaderboard.",
+                icon: Award,
+                color: "from-amber-500 to-orange-500"
+              }
+            ].map((step, index) => (
+              <div key={index} className="relative group">
+                {/* Connector Line */}
+                {index < 2 && (
+                  <div className="hidden md:block absolute top-24 left-full w-full h-0.5 bg-gradient-to-r from-border to-transparent -translate-x-1/2 z-0" />
+                )}
+
+                <Card className="relative bg-card/40 backdrop-blur-xl border-border/50 hover:border-primary/50 transition-all duration-500 hover:scale-105 transform-gpu hover:-translate-y-2 h-full">
+                  <CardContent className="p-6 lg:p-8 space-y-6">
+                    <div className="relative">
+                      <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-500 mx-auto`}>
+                        <step.icon className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
+                      </div>
+                      <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center shadow-lg">
+                        <span className="text-lg font-bold text-primary-foreground">{step.step}</span>
+                      </div>
+                    </div>
+
+                    <div className="text-center space-y-4">
+                      <h4 className="text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                        {step.title}
+                      </h4>
+                      <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+          <Card className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-warning/10 to-accent/10 backdrop-blur-xl border-primary/20 shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-glow opacity-30 blur-3xl" />
+            
+            <CardContent className="relative p-12 md:p-16 lg:p-20 text-center space-y-10">
+              <div className="space-y-6 max-w-3xl mx-auto">
+                <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                  Ready to Transform Your{" "}
+                  <span className="block mt-2 bg-gradient-to-r from-primary via-warning to-accent bg-clip-text text-transparent">
+                    Campus Experience?
+                  </span>
+                </h3>
+                
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  Join thousands of students and faculty already using BroRise to create 
+                  better, more responsive campus environments.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <Button size="lg" asChild className="bg-gradient-primary hover:opacity-90 shadow-2xl shadow-primary/40 text-lg px-10 py-7">
+                  <Link to="/auth?mode=signup">
+                    Start Your Free Trial <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="border-border/50 hover:bg-muted text-lg px-10 py-7">
+                  <Link to="/auth">
+                    Sign In
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="flex flex-wrap gap-6 lg:gap-8 justify-center text-sm text-muted-foreground pt-6">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>Free for students</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>No credit card required</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <span>Setup in 2 minutes</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Footer */}
+        <footer className="relative border-t border-border/50 bg-background/80 backdrop-blur-xl">
+          <div className="container mx-auto px-6 lg:px-8 py-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
+              <div className="col-span-2 md:col-span-1 space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center shadow-glow">
+                    <MessageSquare className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-warning bg-clip-text text-transparent">
+                    BroRise
+                  </h1>
+                </div>
+                <p className="text-muted-foreground leading-relaxed text-sm">
+                  Transforming campus communication with intelligent complaint management and student engagement.
+                </p>
+              </div>
+
+              <div>
+                <h5 className="font-bold text-foreground mb-4">Product</h5>
+                <ul className="space-y-3">
+                  <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors text-sm">Features</a></li>
+                  <li><a href="#showcase" className="text-muted-foreground hover:text-primary transition-colors text-sm">Showcase</a></li>
+                  <li><a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors text-sm">How It Works</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h5 className="font-bold text-foreground mb-4">Company</h5>
+                <ul className="space-y-3">
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">About Us</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Contact</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Privacy Policy</a></li>
+                </ul>
+              </div>
+
+              <div>
+                <h5 className="font-bold text-foreground mb-4">Connect</h5>
+                <ul className="space-y-3">
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">Twitter</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">LinkedIn</a></li>
+                  <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">GitHub</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="pt-8 border-t border-border/50 text-center text-muted-foreground text-sm">
+              <p>&copy; 2024 BroRise. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
+      </div>
 
       <style>{`
         @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        @keyframes float-slow {
-          0%, 100% {
-            transform: translateY(0px) rotateY(-10deg) rotateX(5deg);
-          }
-          50% {
-            transform: translateY(-15px) rotateY(-10deg) rotateX(5deg);
-          }
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-20px) rotate(5deg); }
+          66% { transform: translateY(10px) rotate(-5deg); }
         }
 
         .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-float-slow {
-          animation: float-slow 6s ease-in-out infinite;
-        }
-
-        .perspective-1000 {
-          perspective: 1000px;
+          animation: float 20s ease-in-out infinite;
         }
 
         .transform-gpu {
-          transform: translateZ(0);
-          will-change: transform;
+          transform: translate3d(0, 0, 0);
         }
       `}</style>
     </div>
