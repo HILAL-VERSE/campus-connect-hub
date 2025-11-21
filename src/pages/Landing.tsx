@@ -120,40 +120,39 @@ const Landing = () => {
               </div>
             </div>
 
-            {/* Right - 3D Dashboard Image */}
-            <div className="relative group order-1 lg:order-2">
-              <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl group-hover:opacity-30 transition-opacity duration-700" />
-              
-              <div className="relative transform-gpu transition-all duration-700 hover:scale-105">
-                <img 
-                  src={heroDashboard} 
-                  alt="Dashboard Analytics" 
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                />
+            {/* Right - Stats Cards */}
+            <div className="order-1 lg:order-2">
+              <div className="grid grid-cols-1 gap-8">
+                {/* Fast Response Card */}
+                <Card className="group relative bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu hover:scale-105 hover:border-primary/50 transition-all duration-500 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
+                  <CardContent className="p-10 lg:p-12 space-y-4 relative">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-500">
+                      <Rocket className="w-8 h-8 lg:w-10 lg:h-10 text-primary-foreground" />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-lg lg:text-xl font-medium text-foreground">Fast Response</p>
+                      <p className="text-5xl lg:text-6xl font-bold text-primary">&lt;24h</p>
+                      <p className="text-base lg:text-lg text-muted-foreground">Average resolution time</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Satisfaction Card */}
+                <Card className="group relative bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu hover:scale-105 hover:border-warning/50 transition-all duration-500 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-warning to-accent opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
+                  <CardContent className="p-10 lg:p-12 space-y-4 relative">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-warning to-accent flex items-center justify-center shadow-glow group-hover:scale-110 transition-transform duration-500">
+                      <Award className="w-8 h-8 lg:w-10 lg:h-10 text-primary-foreground" />
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-lg lg:text-xl font-medium text-foreground">Student Satisfaction</p>
+                      <p className="text-5xl lg:text-6xl font-bold text-warning">98%</p>
+                      <p className="text-base lg:text-lg text-muted-foreground">Overall rating</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-
-              {/* Floating accent cards */}
-              <Card className="absolute -right-4 lg:-right-8 top-16 lg:top-20 w-40 lg:w-48 bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu rotate-6 hover:rotate-12 transition-all duration-500 hidden md:block">
-                <CardContent className="p-3 lg:p-4 space-y-2">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-                    <Rocket className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
-                  </div>
-                  <p className="text-xs lg:text-sm font-medium text-foreground">Fast Response</p>
-                  <p className="text-xl lg:text-2xl font-bold text-primary">2.4hrs</p>
-                  <p className="text-xs text-muted-foreground">Avg. resolution time</p>
-                </CardContent>
-              </Card>
-
-              <Card className="absolute -left-4 lg:-left-8 bottom-16 lg:bottom-20 w-40 lg:w-48 bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu -rotate-6 hover:-rotate-12 transition-all duration-500 hidden md:block">
-                <CardContent className="p-3 lg:p-4 space-y-2">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br from-warning to-accent flex items-center justify-center">
-                    <Award className="w-4 h-4 lg:w-5 lg:h-5 text-primary-foreground" />
-                  </div>
-                  <p className="text-xs lg:text-sm font-medium text-foreground">Satisfaction</p>
-                  <p className="text-xl lg:text-2xl font-bold text-warning">95%</p>
-                  <p className="text-xs text-muted-foreground">Student rating</p>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </section>
