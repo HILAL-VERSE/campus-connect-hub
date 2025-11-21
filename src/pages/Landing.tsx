@@ -76,7 +76,7 @@ const Landing = () => {
           
           <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-7xl mx-auto">
             {/* Left Content */}
-            <div className="space-y-10 text-center lg:text-left order-2 lg:order-1">
+            <div className="space-y-10 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20">
                 <Sparkles className="w-4 h-4 text-primary" />
                 <span className="text-sm text-primary font-medium">AI-Powered Campus Solutions</span>
@@ -121,7 +121,7 @@ const Landing = () => {
             </div>
 
             {/* Right - Stats Cards */}
-            <div className="order-1 lg:order-2">
+            <div>
               <div className="grid grid-cols-1 gap-8">
                 {/* Fast Response Card */}
                 <Card className="group relative bg-card/60 backdrop-blur-xl border-border/50 shadow-xl transform-gpu hover:scale-105 hover:border-primary/50 transition-all duration-500 overflow-hidden">
