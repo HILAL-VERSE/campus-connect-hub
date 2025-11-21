@@ -5,12 +5,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { StatusBadge } from "./StatusBadge";
 import { PriorityBadge } from "./PriorityBadge";
 import { Badge } from "@/components/ui/badge";
-import { Clock, User, Lightbulb, Save } from "lucide-react";
+import { Clock, User, Lightbulb, Save, Award } from "lucide-react";
 import { format } from "date-fns";
 
 interface AdminComplaintDialogProps {
@@ -24,12 +25,14 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
   const [status, setStatus] = useState(complaint.status);
   const [progress, setProgress] = useState([complaint.progress]);
   const [adminNotes, setAdminNotes] = useState(complaint.admin_notes || "");
+  const [creditPoints, setCreditPoints] = useState<number>(0);
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      const { error } = await supabase
+      // Update complaint
+      const { error: complaintError } = await supabase
         .from("complaints")
         .update({
           status,
@@ -38,8 +41,32 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
         })
         .eq("id", complaint.id);
 
-      if (error) throw error;
-      toast.success("Complaint updated successfully");
+      if (complaintError) throw complaintError;
+
+      // Award credit points if specified and valid
+      if (creditPoints > 0 && creditPoints <= 5) {
+        const { data: profile, error: profileError } = await supabase
+          .from("profiles")
+          .select("ticket_points")
+          .eq("id", complaint.user_id)
+          .single();
+
+        if (profileError) throw profileError;
+
+        const { error: updateError } = await supabase
+          .from("profiles")
+          .update({
+            ticket_points: (profile.ticket_points || 0) + creditPoints
+          })
+          .eq("id", complaint.user_id);
+
+        if (updateError) throw updateError;
+        
+        toast.success(`Complaint updated and ${creditPoints} credit points awarded!`);
+      } else {
+        toast.success("Complaint updated successfully");
+      }
+      
       onUpdate();
       onOpenChange(false);
     } catch (error: any) {
@@ -121,6 +148,30 @@ export const AdminComplaintDialog = ({ complaint, open, onOpenChange, onUpdate }
               placeholder="Add internal notes about this complaint..."
               className="min-h-[100px]"
             />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2">
+              <Award className="w-4 h-4 text-warning" />
+              Award Credit Points (1-5)
+            </Label>
+            <div className="flex items-center gap-4">
+              <Input
+                type="number"
+                min="0"
+                max="5"
+                value={creditPoints}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value) || 0;
+                  setCreditPoints(Math.min(5, Math.max(0, val)));
+                }}
+                placeholder="0"
+                className="w-24"
+              />
+              <p className="text-sm text-muted-foreground">
+                Award 1-5 credit points to the student for valid complaint
+              </p>
+            </div>
           </div>
 
           <div className="flex gap-2 justify-end">
