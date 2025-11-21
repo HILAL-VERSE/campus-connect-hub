@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, Award } from "lucide-react";
 import { toast } from "sonner";
 
 const StudentDashboard = () => {
@@ -19,6 +19,7 @@ const StudentDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [userPoints, setUserPoints] = useState<number>(0);
 
   const fetchComplaints = async () => {
     if (!user) return;
@@ -42,8 +43,26 @@ const StudentDashboard = () => {
     }
   };
 
+  const fetchUserPoints = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("ticket_points")
+        .eq("id", user.id)
+        .single();
+
+      if (error) throw error;
+      setUserPoints(data?.ticket_points || 0);
+    } catch (error: any) {
+      console.error("Failed to load points:", error);
+    }
+  };
+
   useEffect(() => {
     fetchComplaints();
+    fetchUserPoints();
   }, [user]);
 
   useEffect(() => {
@@ -90,7 +109,19 @@ const StudentDashboard = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <Card className="bg-gradient-to-br from-warning/10 to-accent/10 border-warning/20">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                <Award className="w-4 h-4 text-warning" />
+                Credit Points
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold text-warning">{userPoints}</p>
+              <p className="text-xs text-muted-foreground mt-1">Earned from valid complaints</p>
+            </CardContent>
+          </Card>
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-muted-foreground">Total</CardTitle>
