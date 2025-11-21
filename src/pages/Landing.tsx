@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageSquare, TrendingUp, Award, Shield, Zap, Users, BarChart3, CheckCircle2, ArrowRight, Sparkles, Target, Rocket } from "lucide-react";
+import { MessageSquare, TrendingUp, Award, Shield, Zap, Users, BarChart3, CheckCircle2, ArrowRight, Target, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroDashboard from "@/assets/hero-dashboard.png";
 import featureTracking from "@/assets/feature-tracking.png";
@@ -70,18 +70,13 @@ const Landing = () => {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-6 lg:px-8 py-24 md:py-32 lg:py-40">
+        <section className="container mx-auto px-8 lg:px-16 xl:px-24 py-24 md:py-32 lg:py-40">
           <div className="absolute inset-0 bg-gradient-hero opacity-30 blur-3xl pointer-events-none" />
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-glow opacity-20 blur-3xl animate-pulse pointer-events-none" />
           
           <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center max-w-7xl mx-auto">
             {/* Left Content */}
             <div className="space-y-10 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm text-primary font-medium">AI-Powered Campus Solutions</span>
-              </div>
-              
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
                 <span className="block mb-2">Transform</span>
                 <span className="block mb-2">Campus Life</span>
@@ -98,25 +93,14 @@ const Landing = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
                 <Button size="lg" asChild className="bg-gradient-primary hover:opacity-90 shadow-xl shadow-primary/30 text-lg px-8 py-6">
                   <Link to="/auth?mode=signup">
-                    Start Free Trial <ArrowRight className="ml-2 w-5 h-5" />
+                    Submit Your First Complaint <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="border-border/50 hover:bg-muted text-lg px-8 py-6">
                   <Link to="#features">
-                    Explore Features
+                    Explore Platform
                   </Link>
                 </Button>
-              </div>
-
-              <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8 text-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">No credit card required</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span className="text-muted-foreground">Free for students</span>
-                </div>
               </div>
             </div>
 
@@ -158,7 +142,7 @@ const Landing = () => {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+        <section id="features" className="container mx-auto px-8 lg:px-16 xl:px-24 py-24 md:py-32">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <Zap className="w-4 h-4 text-primary" />
@@ -247,7 +231,7 @@ const Landing = () => {
         </section>
 
         {/* Visual Showcase Section */}
-        <section id="showcase" className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+        <section id="showcase" className="container mx-auto px-8 lg:px-16 xl:px-24 py-24 md:py-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto mb-32">
             {/* Left - 3D Tracking Image */}
             <div className="relative group">
@@ -257,7 +241,7 @@ const Landing = () => {
                 <img 
                   src={featureTracking} 
                   alt="Progress Tracking" 
-                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  className="w-full h-auto object-contain drop-shadow-2xl rounded-3xl"
                 />
               </div>
             </div>
@@ -345,7 +329,7 @@ const Landing = () => {
                 <img 
                   src={featureRewards} 
                   alt="Rewards System" 
-                  className="w-full h-auto object-contain drop-shadow-2xl"
+                  className="w-full h-auto object-contain drop-shadow-2xl rounded-3xl"
                 />
               </div>
             </div>
@@ -353,7 +337,7 @@ const Landing = () => {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="container mx-auto px-6 lg:px-8 py-24 md:py-32 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
+        <section id="how-it-works" className="container mx-auto px-8 lg:px-16 xl:px-24 py-24 md:py-32 bg-gradient-to-b from-transparent via-primary/5 to-transparent">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
               <Rocket className="w-4 h-4 text-primary" />
@@ -427,7 +411,7 @@ const Landing = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="container mx-auto px-6 lg:px-8 py-24 md:py-32">
+        <section className="container mx-auto px-8 lg:px-16 xl:px-24 py-24 md:py-32">
           <Card className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-warning/10 to-accent/10 backdrop-blur-xl border-primary/20 shadow-2xl">
             <div className="absolute inset-0 bg-gradient-glow opacity-30 blur-3xl" />
             
@@ -449,7 +433,7 @@ const Landing = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
                 <Button size="lg" asChild className="bg-gradient-primary hover:opacity-90 shadow-2xl shadow-primary/40 text-lg px-10 py-7">
                   <Link to="/auth?mode=signup">
-                    Start Your Free Trial <ArrowRight className="ml-2 w-5 h-5" />
+                    Get Started Now <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild className="border-border/50 hover:bg-muted text-lg px-10 py-7">
@@ -458,28 +442,13 @@ const Landing = () => {
                   </Link>
                 </Button>
               </div>
-
-              <div className="flex flex-wrap gap-6 lg:gap-8 justify-center text-sm text-muted-foreground pt-6">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>Free for students</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>No credit card required</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-primary" />
-                  <span>Setup in 2 minutes</span>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </section>
 
         {/* Footer */}
         <footer className="relative border-t border-border/50 bg-background/80 backdrop-blur-xl">
-          <div className="container mx-auto px-6 lg:px-8 py-16">
+          <div className="container mx-auto px-8 lg:px-16 xl:px-24 py-16">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
               <div className="col-span-2 md:col-span-1 space-y-4">
                 <div className="flex items-center gap-3">
